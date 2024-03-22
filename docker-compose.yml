@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  angular:
+    container_name: notes
+    image: ${APP_NAME}:ng
+    build:
+      dockerfile_inline: |
+        FROM ${BUILT_IMAGE}
+        WORKDIR /${APP_NAME}
+        COPY . .
+        RUN bun i
+        CMD ["ng", "serve", "--host", "0.0.0.0"]
+    ports:
+      - "4200:4200"
+    environment:
+      - APP_NAME
+      - BUILT_IMAGE
+    volumes:
+      - .:/${APP_NAME}
+
+networks:
+  default:
+    driver: bridge
+    name: ${APP_NAME}
