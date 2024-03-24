@@ -16,4 +16,20 @@ export class NotesService {
 		() =>
 			new Set(this.notes().map(note => note.folder.charAt(0).toUpperCase() + note.folder.slice(1)))
 	);
+
+	getNoteById(id: string): Note {
+		const note = this.notes().find(note => note.id === id);
+		if (note) {
+			return note;
+		} else {
+			return {
+				id: '',
+				title: '',
+				subtitle: '',
+				content: '',
+				date: '',
+				folder: ''
+			};
+		}
+	}
 }

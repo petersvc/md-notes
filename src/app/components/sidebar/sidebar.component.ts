@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeService } from '../../services/font-awesome.service';
 import { NotesService } from '../../services/notes.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'app-sidebar',
 	standalone: true,
-	imports: [FontAwesomeModule],
+	imports: [FontAwesomeModule, RouterLink],
 	templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent {

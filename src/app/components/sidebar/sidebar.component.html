@@ -1,43 +1,107 @@
 <div class="flex h-full w-full flex-col">
-	<div class="flex h-full flex-col rounded-xl dark:bg-dark-40">
-		<fa-icon [icon]="solid['faBars']" class="ml-6 mt-6 inline-block" />
+  <div class="flex h-full flex-col rounded-xl dark:bg-dark-40">
+    <div class="flex items-center pl-6 py-6 border-bn dark:border-dark-20">
+      <div
+        class="flex justify-center items-center dark:bg-dark-30 rounded-full"
+      >
+        <fa-icon
+          [icon]="solid['faBars']"
+          class="dark:text-light-50 text-[15px]"
+        />
+      </div>
+      <!-- <span class="text-sm ml-3">Peter Costa</span> -->
+    </div>
 
-		<div class="mt-12 flex flex-row items-center px-6 py-3">
-			<button class="flex w-full flex-row items-center justify-between">
-				<div>
-					<fa-icon [icon]="solid['faDatabase']" class="text-[16px]" />
-					<span class="text-md mx-3 dark:text-light-50">Work</span>
-				</div>
+    <div class="flex items-center ml-6 mt-6">
+      <fa-icon
+        [icon]="solid['faHome']"
+        class="dark:text-light-50 text-[14px]"
+      />
+      <span class="text-sm ml-4">Home</span>
+    </div>
 
-				<div class="flex flex-col items-center dark:text-dark-0">
-					<fa-icon [icon]="solid['faChevronUp']" class="h-[7px] text-[12px] " />
-					<fa-icon
-						[icon]="solid['faChevronDown']"
-						class="mb-[6px] h-[7px] text-[12px]" />
-				</div>
-			</button>
-		</div>
+    <div class="flex items-center mx-0 mt-5">
+      <fa-icon
+        [icon]="solid['faSearch']"
+        class="absolute ml-6 dark:text-light-50 text-[14px]"
+      />
+      <input
+        type="text"
+        class="w-full dark:bg-transparent rounded-lhg indent-14 dark:placeholder-light-50 text-sm borderr dark:border-dark-20"
+        placeholder="Search"
+      />
+    </div>
 
-		<div class="mt-2 flex flex-col">
-			@for (folder of folders(); track $index) {
-				<div class="mt-2 flex h-6 flex-col justify-between px-6">
-					<div class="flex h-6 flex-row items-center">
-						<fa-icon [icon]="solid['faChevronRight']" class="text-[11px] dark:text-dark-0" />
-						<span class="ml-3 text-sm dark:text-light-50">{{ folder }}</span>
-					</div>
+    <div class="mt-1 flex flex-row items-center px-6 py-3">
+      <button class="flex w-full flex-row items-center justify-between">
+        <div>
+          <fa-icon [icon]="solid['faDatabase']" class="text-[14px]" />
+          <span class="text-sm ml-5 dark:text-light-50">Work</span>
+        </div>
 
-					@for (note of this.getNotesByFolder(folder); track $index) {
-						<span class="ml-9 mt-2 text-sm dark:text-light-50">{{ note.title }}</span>
-					}
-				</div>
-			}
-		</div>
+        <div class="flex flex-col items-center dark:text-dark-0">
+          <fa-icon [icon]="solid['faChevronUp']" class="h-[7px] text-[12px]" />
+          <fa-icon
+            [icon]="solid['faChevronDown']"
+            class="mb-[6px] h-[7px] text-[12px]"
+          />
+        </div>
+      </button>
+    </div>
 
-		<div
-			class="row mx-3 mb-3 mt-auto flex items-center justify-center rounded-md dark:bg-dark-30 px-6 py-2">
+    <div class="mt-3 flex flex-col">
+      <div
+        class="flex flex-row justify-between items-center px-6 border-t border-dark-20 pt-6 pb-3"
+      >
+        <!-- <fa-icon [icon]="solid['faFolder']" class="dark:text-light-50 text-[16px]" /> -->
+        <span class="ml-0 text-sm text-dark-0">Notes</span>
+        <fa-icon [icon]="solid['faPlus']" class="text-[16px] text-light-0" />
+      </div>
+      @for (folder of folders(); track $index) {
+        <div class="mt-2 flex h-6 flex-col justify-between px-6">
+          <div class="flex h-6 flex-row items-center">
+            <fa-icon
+              [icon]="solid['faChevronRight']"
+              class="text-[11px] dark:text-dark-0"
+            />
+            <span class="ml-3 text-sm dark:text-light-50">{{ folder }}</span>
+          </div>
+
+          @for (note of this.getNotesByFolder(folder); track $index) {
+            <div class="flex flex-row items-center ml-5 mt-3">
+              <a routerLink="/note/{{ note.id }}" class="">
+                <fa-icon
+                  [icon]="regular['faFile']"
+                  class="text-[13px] dark:text-dark-0"
+                />
+                <span class="ml-3 text-sm dark:text-light-50">{{
+                  note.title
+                }}</span>
+              </a>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="row mt-auto mb-6 flex items-center px-6">
+      <button class="flex flex-row items-center justify-center">
+        <fa-icon [icon]="solid['faGear']" class="text-[14px] dark:text-light-50" />
+				<span class="text-sm ml-4">Settings</span>
+      </button>
+    </div>
+		<!-- <div class="row mt-4 mb-6 flex items-center px-6">
+      <button class="flex flex-row items-center justify-center">
+        <fa-icon [icon]="solid['faMoon']" class="text-[14px] dark:text-light-50" />
+				<span class="text-sm ml-4">Dark mode</span>
+      </button>
+    </div> -->
+    <!-- <div
+			class="row mx-3 mb-7 mt-auto flex items-center justify-center rounded-md dark:bg-light-1000 px-6 py-2">
 			<button class="flex flex-row items-center justify-center">
-				<fa-icon [icon]="solid['faPlus']" class="text-[16px] text-zinc-200" />
+				<div class="absolute flex justify-center items-center border border-light-0/25 rounded-full w-10 h-10 animate-pingh"></div>
+				<fa-icon [icon]="solid['faPlus']" class="text-[16px] text-light-0" />
 			</button>
-		</div>
-	</div>
+		</div> -->
+  </div>
 </div>

@@ -1,0 +1,103 @@
+<div class="flex w-full flex-col">
+  <form
+    class="mt-6 self-center w-[700px] bgg-dark-20"
+    id="noteForm"
+    [formGroup]="noteForm"
+  >
+    <div class="flex flex-col">
+      <input
+        type="text"
+        formControlName="title"
+        class="text-4xl dark:text-light-50 dark:placeholder-light-50 bg-transparent"
+        [placeholder]="
+          note().title.charAt(0).toUpperCase() + note().title.slice(1)
+        "
+      />
+      <input
+        type="text"
+        formControlName="subtitle"
+        class="mt-5 border-b dark:border-dark-20 pb-12 text-xl dark:text-light-0 dark:placeholder-dark-0 bg-transparent"
+        [placeholder]="
+          note().subtitle.charAt(0).toUpperCase() + note().subtitle.slice(1)
+        "
+      />
+    </div>
+
+		<div [class]="isEditing ? 'hidden' : 'opacity-100'">
+			<button
+				class="absolute right-6 top-[47.5%] flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full"
+				form="noteForm"
+				(click)="toggleEditting()"
+			>
+				<fa-icon [icon]="solid['faPen']" class="text-[14px] dark:text-light-50" />
+			</button>
+		</div>
+    
+
+		<div [class]="isEditing ? 'opacity-100' : 'hidden'">
+			<button
+				class="absolute right-6 top-[45%] flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full"
+				form="noteForm"	
+				(click)="toggleEditting()"
+    	>
+      	<fa-icon [icon]="solid['faXmark']" class="text-[14px] dark:text-light-50" />
+    	</button>
+
+			<button
+				class="absolute right-6 top-[50%] flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full"
+				form="noteForm"
+				type="submit"
+				(click)="saveNote()"
+			>
+				<fa-icon [icon]="solid['faCheck']" class="text-[14px] dark:text-light-50" />
+			</button>
+		</div>
+		
+
+		<button
+      class="absolute right-6 bottom-7 flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full"
+      form="noteForm"
+    >
+      <fa-icon [icon]="solid['faTrash']" class="text-[14px] dark:text-light-50" />
+    </button>
+
+    <div class="markedArea mt-12 flex flex-row self-center">
+      <textarea
+        autoFocus
+        formControlName="content"
+        [placeholder]="note().content"
+        class="h-[600px] flex-1 resize-none bg-transparent text-sm leading-6 dark:text-light-40 outline-none"
+        (input)="handleOnChange($event)"
+      ></textarea>
+      <!-- <div class="marked flex-1" [innerHTML]="mdContent()"></div> -->
+    </div>
+  </form>
+</div>
+
+<!--
+| Coluna 1 | Coluna 2 | Coluna 3 |
+|----------|----------|----------|
+| Dado 1   | Dado 2   | Dado 3   |
+| Dado 4   | Dado 5   | Dado 6   |
+---
+# Título 1
+## Título 2
+### Título 3
+---
+**negrito**, *itálico*
+
+---
+> "Citação, isto é um mero
+>
+> exemplo de como fazer."
+---
+
+###### Lista ordenada:
+1. item 1
+2. item 2
+
+###### Lista desordenada:
+- Gato
+- Maçã
+
+-->
