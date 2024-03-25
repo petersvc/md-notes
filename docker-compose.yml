@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   angular:
-    container_name: notes
+    container_name: notes-ng
     image: ${APP_NAME}:ng
     build:
       dockerfile_inline: |
@@ -18,8 +18,49 @@ services:
       - BUILT_IMAGE
     volumes:
       - .:/${APP_NAME}
+    depends_on:
+      - springboot
+  
+  springboot:
+    container_name: notes-springboot
+    image: ${APP_NAME}:springboot
+    build:
+      dockerfile_inline: |
+        FROM eclipse-temurin:21-alpine
+        WORKDIR /api
+        COPY ./api .
+        RUN chmod 777 ./gradlew
+        CMD ["./gradlew", "run"]
+    ports:
+      - "9090:9090"
+    environment:
+      - APP_NAME
+      - BUILT_IMAGE
+    volumes:
+      - ./api:/api
+    depends_on:
+      - postgres
+  
+  postgres:
+    image: postgres:13.14-alpine3.19
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 618789
+      POSTGRES_DB: notes
+    ports:
+      - "5432:5432"
 
-networks:
-  default:
-    driver: bridge
-    name: ${APP_NAME}
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@mail.com
+      PGADMIN_DEFAULT_PASSWORD: 618789
+    depends_on:
+      - postgres
+    ports:
+      - "54621:80"
+      - "443:443"
