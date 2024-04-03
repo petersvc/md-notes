@@ -3,6 +3,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeService } from '../../services/font-awesome.service';
 import { NotesService } from '../../services/notes.service';
 import { RouterLink } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
 	selector: 'app-sidebar',
@@ -11,13 +12,22 @@ import { RouterLink } from '@angular/router';
 	templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent {
+	notesService = inject(NotesService);
 	FontAwesomeService = inject(FontAwesomeService);
 	regular = this.FontAwesomeService.regular;
 	solid = this.FontAwesomeService.solid;
 
-	notesService = inject(NotesService);
-	notes = this.notesService.notes;
-	folders = this.notesService.folders;
+	get notes() {
+		return this.notesService.notes;
+	}
+
+	get folders() {
+		return this.notesService.folders;
+	}
+
+	ngOnInit() {
+		this.notesService.getNotes().pipe(take(1)).subscribe();
+	}
 
 	getNotesByFolder(folder: string) {
 		return this.notes().filter(note => note.folder === folder.toLowerCase());

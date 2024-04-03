@@ -1,78 +1,102 @@
-<div class="flex w-full flex-col">
-  <form
-    class="mt-6 self-center w-[700px] bgg-dark-20"
-    id="noteForm"
-    [formGroup]="noteForm"
-  >
-    <div class="flex flex-col">
-      <input
-        type="text"
-        formControlName="title"
-        class="text-4xl dark:text-light-50 dark:placeholder-light-50 bg-transparent"
-        [placeholder]="
-          note().title.charAt(0).toUpperCase() + note().title.slice(1)
-        "
-      />
-      <input
-        type="text"
-        formControlName="subtitle"
-        class="mt-5 border-b dark:border-dark-20 pb-12 text-xl dark:text-light-0 dark:placeholder-dark-0 bg-transparent"
-        [placeholder]="
-          note().subtitle.charAt(0).toUpperCase() + note().subtitle.slice(1)
-        "
-      />
+@if (note()) {
+  <div class="flex flex-col w-full h-[93.1%] items-center">
+    <div class="flex justify-end items-center bgg-dark-30 w-full px-8 h-16">
+      <div [class]="isEditing ? 'hidden' : 'opacity-100'">
+        <button
+          class="flex justify-center items-center rounded-md mx-5"
+          form="noteForm"
+          (click)="toggleEditting()"
+        >
+          <fa-icon
+            [icon]="solid['faPen']"
+            class="text-[14px] dark:text-light-0"
+          />
+        </button>
+      </div>
+
+      <div [class]="isEditing ? 'opacity-100 flex items-center justify-between' : 'hidden'">
+        <button
+          class="flex justify-center items-center"
+          form="noteForm"
+          (click)="toggleEditting()"
+        >
+          <fa-icon
+            [icon]="solid['faXmark']"
+            class="text-[14px] dark:text-light-50"
+          />
+        </button>
+
+        <button
+          class="flex justify-center items-center ml-5"
+          form="noteForm"
+          type="submit"
+          (click)="saveOrUpdateNote()"
+        >
+          <fa-icon
+            [icon]="solid['faCheck']"
+            class="text-[14px] dark:text-light-50"
+          />
+        </button>
+      </div>
+
+      <div [class]="isEditing ? 'hidden' : 'opacity-100'">
+        <button
+          class="flex justify-center items-center borderr dark:border-dark-20 dark:bgg-primaryBg-100 rounded-md"
+          form="noteForm"
+          (click)="toast.invoke(true, 'Nota criada com sucesso')"
+        >
+          <fa-icon
+            [icon]="solid['faEllipsis']"
+            class="text-[15px] dark:text-light-0"
+          />
+        </button>
+      </div>
     </div>
 
-		<div [class]="isEditing ? 'hidden' : 'opacity-100'">
-			<button
-				class="absolute right-6 top-[47.5%] flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full"
-				form="noteForm"
-				(click)="toggleEditting()"
-			>
-				<fa-icon [icon]="solid['faPen']" class="text-[14px] dark:text-light-50" />
-			</button>
-		</div>
-    
-
-		<div [class]="isEditing ? 'opacity-100' : 'hidden'">
-			<button
-				class="absolute right-6 top-[45%] flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full"
-				form="noteForm"	
-				(click)="toggleEditting()"
-    	>
-      	<fa-icon [icon]="solid['faXmark']" class="text-[14px] dark:text-light-50" />
-    	</button>
-
-			<button
-				class="absolute right-6 top-[50%] flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full"
-				form="noteForm"
-				type="submit"
-				(click)="saveNote()"
-			>
-				<fa-icon [icon]="solid['faCheck']" class="text-[14px] dark:text-light-50" />
-			</button>
-		</div>
-		
-
-		<button
-      class="absolute right-6 bottom-7 flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full"
-      form="noteForm"
+    <form
+      class="justify-self-center w-[730px] bgg-dark-20"
+      id="noteForm"
+      [formGroup]="noteForm"
     >
-      <fa-icon [icon]="solid['faTrash']" class="text-[14px] dark:text-light-50" />
-    </button>
+      <div class="flex flex-col py-6 border-b dark:border-dark-20">
+        <input
+          type="text"
+          formControlName="title"
+          class="text-4xl font-bold  dark:text-light-50 dark:placeholder-light-50 bg-transparent"
+          [placeholder]="
+            note().title.charAt(0).toUpperCase() + note().title.slice(1)
+          "
+        />
+        <input
+          type="text"
+          formControlName="subtitle"
+          class="mt-5 text-xl font-semibold dark:text-light-0 dark:placeholder-dark-0 bg-transparent"
+          [placeholder]="
+            note().subtitle.charAt(0).toUpperCase() + note().subtitle.slice(1)
+          "
+        />
+      </div>
 
-    <div class="markedArea mt-12 flex flex-row self-center">
-      <textarea
-        autoFocus
-        formControlName="content"
-        [placeholder]="note().content"
-        class="h-[600px] flex-1 resize-none bg-transparent text-sm leading-6 dark:text-light-40 outline-none"
-        (input)="handleOnChange($event)"
-      ></textarea>
-      <!-- <div class="marked flex-1" [innerHTML]="mdContent()"></div> -->
-    </div>
-  </form>
-</div>
+      <div class="markedArea mt-12 flex flex-row self-center">
+        <textarea
+          autoFocus
+          formControlName="content"
+          [placeholder]="note().content"
+          [class]="
+            isEditing
+              ? 'opacity-100 h-[600px] flex-1 resize-none bg-transparent text-sm leading-6 dark:text-light-40 outline-none'
+              : 'hidden'
+          "
+          (input)="handleOnChange($event)"
+        ></textarea>
+        <div [class]="isEditing ? 'hidden' : 'opacity-100'">
+          <div class="marked flex-1" [innerHTML]="mdContent()"></div>
+        </div>
+      </div>
+    </form>
+    <div class="px-8 bg-transparent"></div>
+  </div>
+}
 
 <!--
 | Coluna 1 | Coluna 2 | Coluna 3 |
@@ -100,4 +124,6 @@
 - Gato
 - Maçã
 
+
+     class="{h-[600px] flex-1 resize-none bg-transparent text-sm leading-6 dark:text-light-40 outline-none}"
 -->

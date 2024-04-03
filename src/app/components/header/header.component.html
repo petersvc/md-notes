@@ -1,12 +1,26 @@
-<div class="flex flex-row items-center justify-between w-full h-20 pl-8">
+<div class="flex flex-row items-center justify-between w-full h-12 pr-6 border-b dark:border-dark-20">
 	<div>
-		<fa-icon [icon]="solid['faAnglesLeft']" class="dark:text-dark-0" />
+		<fa-icon [icon]="solid['faAnglesLeft']" class="ml-3 dark:text-dark-0 text-[14px]" />
 	</div>
-	<div class="flex items-center w-[70%]">
+	<div class="flex items-center w-[72%] justify-center">
+		<div class="flex items-center mx-0 border dark:border-dark-10 py-1 w-[62%] bg-dark-40 rounded-md">
+      <fa-icon
+        [icon]="solid['faSearch']"
+        class="ml-4 dark:text-dark-0 text-[14px]"
+      />
+      <input
+        type="text"
+        class="ml-3 w-full dark:bg-transparent rounded-lg dark:placeholder-dark-0 text-sm borderr dark:border-dark-20 font-semibold"
+        placeholder="Search notes..."
+      />
+			<div class="dark:bg-dark-10 mr-1 rounded-sm">
+				<span class="text-[12px] dark:text-light-0 px-2 font-bold">ctrl+k</span>
+			</div>
+    </div>
 		<!-- <fa-icon [icon]="solid['faSearch']" class="absolute ml-5 dark:text-dark-0 text-[13px]" />
 		<input type="text" class="w-full dark:bg-dark-40 py-2 rounded-full indent-10 dark:placeholder-dark-0 text-sm" placeholder="Search"> -->
 	</div>
-	<div class="flex justify-center items-center h-10 w-10 border dark:border-dark-20 rounded-full">
-		<fa-icon [icon]="solid['faUser']" class="dark:text-light-50 text-[13px]" />
+	<div class="flex justify-center items-center h-8 w-8 border dark:border-dark-20 rounded-full">
+		<img src="../../../../../assets/black.png" class="rounded-full" alt="user-image">
 	</div>
 </div>

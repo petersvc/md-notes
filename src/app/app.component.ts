@@ -1,17 +1,20 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { NoteComponent } from "./components/content/note.component";
+import { ToastComponent } from './components/toast/toast.component';
+import { ToastService } from "./services/toast.service";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, SidebarComponent, HeaderComponent, NoteComponent],
+  imports: [RouterOutlet, SidebarComponent, HeaderComponent, NoteComponent, ToastComponent],
   templateUrl: "./app.component.html",
 })
 export class AppComponent {
   title = "notes";
+  toast = inject(ToastService);
 
   constructor() {
     this.setTheme();

@@ -1,0 +1,9 @@
+@if (toast.show) {
+  <div class='flex justify-between items-center rounded-md animate-fadeInRight w-[380px] h-[60px] {{toast.bgColor}}'>
+    <div class="flex flex-row items-center">
+      <fa-icon [icon]="regular[toast.icon]" class='text-[18px] ml-4 {{toast.textColor}}' />
+      <span class='ml-4 text-sm {{toast.textColor}}'>{{toast.message}}</span>
+    </div>
+  </div>
+}
+

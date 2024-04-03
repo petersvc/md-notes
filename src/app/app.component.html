@@ -1,7 +1,10 @@
-<main class="bg-light dark:bg-dark-50 flex h-[100vh] w-full flex-row p-6">
-  <app-sidebar class="flex min-w-[255px]" />
+<main class="bg-light dark:bg-dark-45 flex h-[100vh] w-full flex-row">
+  <app-sidebar class="flex min-w-[240px]" />
+
   <section class="w-full">
     <app-header />
     <router-outlet />
   </section>
+  
+  <app-toast class="absolute bottom-6 right-6" />  
 </main>

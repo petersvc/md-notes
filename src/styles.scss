@@ -1,67 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
 div.marked {
-	h1 {
-		font-size: 2.6em;
-	}
-	h2 {
-		font-size: 2.4em;
-	}
-	h3 {
-		font-size: 2.2em;
-	}
-	h4 {
-		font-size: 2em;
-	}
-	h5 {
-		font-size: 1.8em;
-	}
-	h6 {
-		font-size: 1.6em;
-	}
-	ol {
-		list-style: decimal;
-	}
-	ul {
-		list-style: disc;
-	}
-	li {
-		margin-left: 18px;
-	}
+  h1 {
+    font-size: 2.5em;
+  }
+  h2 {
+    font-size: 2.2em;
+  }
+  h3 {
+    font-size: 1.9em;
+  }
+  h4 {
+    font-size: 1.7em;
+  }
+  h5 {
+    font-size: 1.4em;
+  }
+  ol {
+    list-style: decimal;
+  }
+  ul {
+    list-style: disc;
+  }
+  li {
+    margin-left: 18px;
+  }
 
-
-	table {
-		th {
-			border-left: 1px solid #333;
-  		border-right: 1px solid #333;
-			border-top: 1px solid #333;
-			padding: 0.5em;
-		}
-		td {
-			border: 1px solid #333;
-			padding: 0.5em;
-		}
-	}
-	blockquote {
-		background: rgba(0, 0, 0, 0.2);
-		padding: 2em;
-	}
-	hr {
-		border: none;
-	}
+  table {
+    th {
+      border-left: 1px solid #333;
+      border-right: 1px solid #333;
+      border-top: 1px solid #333;
+      padding: 0.5em;
+    }
+    td {
+      border: 1px solid #333;
+      padding: 0.5em;
+    }
+  }
+  blockquote {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2em;
+  }
+  hr {
+    border: none;
+  }
 }
 
 fa-icon {
-	font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 html,
 body {
-	font-family: 'Roboto', sans-serif;
-	color: white;
+  overflow: hidden;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+
+h1, h2, h3, h4, h5, span {
+  font-weight: 500;
 }
